@@ -1,0 +1,2 @@
+# About
+pg is a very basic CLI utility for generating random strings of ASCII characters. The returned string is guaranteed to contain at least 1 lowercase, 1 uppercase, 1 numeric, and 1 special character. It's probably better to use something more rigorous for security conscious applications. The 1 optional argument is the desired length (between 4 and 1024 characters) of the returned string. If no arguments are passed to the program, a string of 12 characters is returned.
