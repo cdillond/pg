@@ -63,7 +63,7 @@ int main(int argc, char **argv)
   arc4random_buf(buf, len + 2);
   unsigned int n = (buf[len] | buf[len + 1] << 8) % len;
 
-  // ensure all chars in buf are acceptable
+  // ensure all chars in buf are acceptable.
   for (int i = 0; i < len; i++)
   {
     if (!is_printable(buf[i]))
@@ -130,7 +130,6 @@ int main(int argc, char **argv)
   }
 
   buf[len] = '\0';
-  printf("%s\n", buf);
-
+  puts((const char *)buf);
   return 0;
 }
