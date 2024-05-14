@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     }
     else
     {
-      puts("unable to parse str len argument");
+      fputs("unable to parse arguments\n", stderr);
       return 1;
     }
   }
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
   if (len > MAX_LEN || len < MIN_LEN)
   {
-    printf("length arg must be in the interval [%d, %d]\n", MIN_LEN, MAX_LEN);
+    fprintf(stderr, "length argument must be in the interval [%d, %d]\n", MIN_LEN, MAX_LEN);
     return 1;
   }
 
