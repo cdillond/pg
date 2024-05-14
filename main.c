@@ -35,6 +35,7 @@ bool is_special(char c)
 int main(int argc, char **argv)
 {
   unsigned int len;
+  bool newline = false;
   /*
     the final 2 bytes of the buffer will be used to improve the distribution of
     substituted characters. realistically, only 1 byte should be fine, since
@@ -50,8 +51,22 @@ int main(int argc, char **argv)
   }
   else if (sscanf(argv[1], "%ud", &len) != 1)
   {
-    puts("unable to parse str len argument");
-    return 1;
+    if (*argv[1] == 'n')
+    {
+      len = DEFAULT_LEN;
+      newline = true;
+    }
+    else
+    {
+      puts("unable to parse str len argument");
+      return 1;
+    }
+  }
+
+  if (!newline && argc > 2)
+  {
+    if (*argv[2] == 'n')
+      newline = true;
   }
 
   if (len > MAX_LEN || len < MIN_LEN)
@@ -130,6 +145,10 @@ int main(int argc, char **argv)
   }
 
   buf[len] = '\0';
-  puts((const char *)buf);
+  if (!newline)
+    fputs((const char *)buf, stdout);
+  else
+    puts((const char *)buf);
+
   return 0;
 }
