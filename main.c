@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <sys/random.h>
 
 bool is_digit(char c)
@@ -91,7 +92,8 @@ int main(int argc, char **argv)
   seen_all = false;
   // n is the randomly chosen index within buf to be replaced if
   // not all char categories were included on the first pass.
-  unsigned int n = ((unsigned int)buf[len] | ((unsigned int)buf[len + 1] << 8)) % len;
+  unsigned int n = *(u_int16_t *)(&buf[len]);
+  n %= len;
   while (!seen_all)
   {
     seen_lower = seen_upper = seen_num = seen_special = false;
