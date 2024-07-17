@@ -1,6 +1,6 @@
-#include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <sys/random.h>
 
 bool is_digit(char c)
 {
@@ -75,8 +75,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  arc4random_buf(buf, len + 2);
-  unsigned int n = (buf[len] | buf[len + 1] << 8) % len;
+  getrandom(buf, len+2, 0);
 
   // ensure all chars in buf are acceptable.
   for (int i = 0; i < len; i++)
@@ -90,6 +89,9 @@ int main(int argc, char **argv)
 
   bool seen_lower, seen_upper, seen_num, seen_special, seen_all;
   seen_all = false;
+  // n is the randomly chosen index within buf to be replaced if
+  // not all char categories were included on the first pass.
+  unsigned int n = ((unsigned int)buf[len] | ((unsigned int)buf[len + 1] << 8)) % len;
   while (!seen_all)
   {
     seen_lower = seen_upper = seen_num = seen_special = false;
