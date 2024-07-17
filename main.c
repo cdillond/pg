@@ -92,7 +92,7 @@ int main(int argc, char **argv)
   seen_all = false;
   // n is the randomly chosen index within buf to be replaced if
   // not all char categories were included on the first pass.
-  unsigned int n = *(u_int16_t *)(&buf[len]);
+  unsigned int n = *(uint16_t *)(&buf[len]);
   n %= len;
   while (!seen_all)
   {
